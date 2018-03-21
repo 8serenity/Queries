@@ -53,8 +53,7 @@ namespace Queries
 
         public User UserExists(string email)
         {
-            //return Users.Get().SingleOrDefault(x => x.Email == email);
-            return (Users as EFRepository<User>).GetUsers().SingleOrDefault(x => x.Email == email);
+            return Users.Get().SingleOrDefault(x => x.Email == email);
         }
 
 

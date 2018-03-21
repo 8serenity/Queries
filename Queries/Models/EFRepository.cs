@@ -16,16 +16,6 @@ namespace Queries.Models
             Db = new QueriesContext();
         }
 
-        public IEnumerable<Query> GetQueries()
-        {
-            return Db.Queries;
-        }
-
-        public IEnumerable<User> GetUsers()
-        {
-            return Db.Users;
-        }
-
         public IQueryable<TEntity> Get()
         {
             return Db.Set<TEntity>();
@@ -46,7 +36,7 @@ namespace Queries.Models
         {
             if (Db.Database.CurrentTransaction != null)
             {
-                //Db.Database.CurrentTransaction.Rollback();
+                Db.Database.CurrentTransaction.Rollback();
             }
         }
 

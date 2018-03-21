@@ -24,22 +24,20 @@ namespace Queries.Controllers
         [HttpPost]
         public ActionResult Create(QueryView newQuery)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    using (RegistrationService registry = new RegistrationService())
-            //    {
-            //        try
-            //        {
-            //            ViewBag.QueryId = (registry.Save(newQuery) as Query).Id;
-            //        }
-            //        catch
-            //        {
-            //            return View();
-            //        }
-            //    }
-            //}
-            RegistrationService registry = new RegistrationService();
-            ViewBag.QueryId = (registry.Save(newQuery) as Query).Id;
+            if (ModelState.IsValid)
+            {
+                using (RegistrationService registry = new RegistrationService())
+                {
+                    try
+                    {
+                        ViewBag.QueryId = (registry.Save(newQuery) as Query).Id;
+                    }
+                    catch
+                    {
+                        return View();
+                    }
+                }
+            }
             return View();
         }
     }
