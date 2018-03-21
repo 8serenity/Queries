@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Queries.Models.UserQueryView>
+
+@{
+    ViewBag.Title = "Querylist";
+}
+
+<h2>Ваши обращения</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QueryText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateWritten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QueryStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.QueryText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateWritten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QueryStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

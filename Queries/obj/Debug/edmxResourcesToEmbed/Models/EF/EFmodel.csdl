@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="queriesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Queries">
+    <Key>
+      <PropertyRef Name="QueryID" />
+    </Key>
+    <Property Name="QueryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QueryText" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateWritten" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="QueryStatus" Type="Int32" />
+    <NavigationProperty Name="Statuses" Relationship="Self.FK__Queries__QuerySt__36B12243" FromRole="Queries" ToRole="Statuses" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Queries__UserId__35BCFE0A" FromRole="Queries" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Statuses">
+    <Key>
+      <PropertyRef Name="StatusID" />
+    </Key>
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <Property Name="StatusDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Queries" Relationship="Self.FK__Queries__QuerySt__36B12243" FromRole="Statuses" ToRole="Queries" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Queries" Relationship="Self.FK__Queries__UserId__35BCFE0A" FromRole="Users" ToRole="Queries" />
+  </EntityType>
+  <Association Name="FK__Queries__QuerySt__36B12243">
+    <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+    <End Role="Queries" Type="Self.Queries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Statuses">
+        <PropertyRef Name="StatusID" />
+      </Principal>
+      <Dependent Role="Queries">
+        <PropertyRef Name="QueryStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Queries__UserId__35BCFE0A">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Queries" Type="Self.Queries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Queries">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="queriesDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Queries" EntityType="Self.Queries" />
+    <EntitySet Name="Statuses" EntityType="Self.Statuses" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK__Queries__QuerySt__36B12243" Association="Self.FK__Queries__QuerySt__36B12243">
+      <End Role="Statuses" EntitySet="Statuses" />
+      <End Role="Queries" EntitySet="Queries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Queries__UserId__35BCFE0A" Association="Self.FK__Queries__UserId__35BCFE0A">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Queries" EntitySet="Queries" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
