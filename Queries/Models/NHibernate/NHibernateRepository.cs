@@ -61,7 +61,11 @@ namespace Queries.Controllers
         }
         public TEntity Save(TEntity entity)
         {
-            return Session.Save(entity) as TEntity;
+            BeginTransaction();
+            Session.Save(entity);
+            CommitTransaction();
+            return entity;
+
         }
         #endregion
         public void Dispose()

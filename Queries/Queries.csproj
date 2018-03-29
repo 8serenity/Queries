@@ -244,7 +244,6 @@
     <EmbeddedResource Include="Mappings\Query.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Mappings\User.hbm.xml" />
     <Content Include="Models\NHibernate\hibernate.cfg.xml" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />

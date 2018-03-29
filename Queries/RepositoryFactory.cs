@@ -10,7 +10,7 @@ namespace Queries
 {
     public static class RepositoryFactory
     {
-        public static bool IsEf = true;
+        public static bool IsEf = false;
         public static IRepository<User> Users()
         {
             if (IsEf)

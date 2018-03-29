@@ -19,7 +19,7 @@ namespace Queries
             Queries = RepositoryFactory.Queries();
         }
 
-        public object Save(QueryView query)
+        public Query Save(QueryView query)
         {
             Query newQuery = new Query();
             newQuery.QueryText = query.QueryText;
@@ -42,8 +42,6 @@ namespace Queries
             }
 
             return Queries.Save(newQuery);
-
-
         }
 
         public User UserExists(User user)
