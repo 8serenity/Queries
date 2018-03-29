@@ -55,7 +55,6 @@ namespace Queries.Controllers
         }
         public TEntity GetById(long id)
         {
-            //return Session.Query<TEntity>().SingleOrDefault(x => x.UserID == id);
             return Session.Get<TEntity>(id);
 
         }

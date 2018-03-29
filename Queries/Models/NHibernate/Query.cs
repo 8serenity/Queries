@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Queries.Models.NHibernate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,5 @@ namespace Queries.Models
         public virtual DateTime DateWritten { get; set; }
         public virtual int UserId { get; set; }
         public virtual int QueryStatus { get; set; }
-
     }
 }

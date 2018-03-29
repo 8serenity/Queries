@@ -37,7 +37,7 @@ namespace Queries
                 newQuery.UserId = Users.Save(newUser).Id;
             }
             else
-            {   
+            {
                 newQuery.UserId = newUser.Id;
             }
 

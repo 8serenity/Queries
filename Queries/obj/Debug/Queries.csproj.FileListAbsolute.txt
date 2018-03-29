@@ -178,3 +178,5 @@ C:\Users\8\Desktop\Query\Queries\Queries\bin\Microsoft.Owin.Security.MicrosoftAc
 C:\Users\8\Desktop\Query\Queries\Queries\obj\Debug\Queries.csprojResolveAssemblyReference.cache
 C:\Users\8\Desktop\Query\Queries\Queries\obj\Debug\Queries.dll
 C:\Users\8\Desktop\Query\Queries\Queries\obj\Debug\Queries.pdb
+C:\Users\8\Desktop\Query\Queries\Queries\bin\FluentNHibernate.dll
+C:\Users\8\Desktop\Query\Queries\Queries\bin\FluentNHibernate.xml
