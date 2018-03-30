@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Queries.Controllers
+﻿namespace Queries.Controllers
 {
     public class Startup
     {

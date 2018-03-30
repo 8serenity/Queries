@@ -180,3 +180,7 @@ C:\Users\8\Desktop\Query\Queries\Queries\obj\Debug\Queries.dll
 C:\Users\8\Desktop\Query\Queries\Queries\obj\Debug\Queries.pdb
 C:\Users\8\Desktop\Query\Queries\Queries\bin\FluentNHibernate.dll
 C:\Users\8\Desktop\Query\Queries\Queries\bin\FluentNHibernate.xml
+C:\Users\8\Desktop\Query\Queries\Queries\bin\DataAccessLayer.dll
+C:\Users\8\Desktop\Query\Queries\Queries\bin\Models.dll
+C:\Users\8\Desktop\Query\Queries\Queries\bin\DataAccessLayer.pdb
+C:\Users\8\Desktop\Query\Queries\Queries\bin\Models.pdb

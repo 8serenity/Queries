@@ -1,9 +1,9 @@
-﻿using Queries.Controllers;
-using Queries.Models;
+﻿using DataAccessLayer;
+using Models.DataObjects;
+using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Security;
 
 namespace Queries
@@ -15,8 +15,8 @@ namespace Queries
 
         public RegistrationService()
         {
-            Users = RepositoryFactory.Users();
-            Queries = RepositoryFactory.Queries();
+            Users = RepositoryFactory.EntityRepo<User>();
+            Queries = RepositoryFactory.EntityRepo<Query>();
         }
 
         public Query Save(QueryView query)
@@ -28,12 +28,14 @@ namespace Queries
 
             User newUser = UserExists(query.Email);
 
-            if (newUser == null){
+            if (newUser == null)
+            {
                 newUser = new User();
                 newUser.Email = query.Email;
                 newUser.Name = query.Name;
                 newUser.Surname = query.Surname;
                 newUser.Password = Membership.GeneratePassword(8, 1);
+                newUser.Birthdate = query.Birthdate;
                 newQuery.UserId = Users.Save(newUser).Id;
             }
             else
@@ -44,16 +46,21 @@ namespace Queries
             return Queries.Save(newQuery);
         }
 
-        public User UserExists(User user)
-        {
-            return Users.Get().SingleOrDefault(x => x.Email == user.Email);
-        }
-
         public User UserExists(string email)
         {
             return Users.Get().SingleOrDefault(x => x.Email == email);
         }
 
+        public int UserValid(UserLoginView user)
+        {
+            var checkedUser = UserExists(user.Email);
+            if (checkedUser != null && user.Password == checkedUser.Password)
+            {
+                return checkedUser.Id;
+            }
+
+            return 0;
+        }
 
         public List<UserQueryView> UserQueries(int id)
         {
