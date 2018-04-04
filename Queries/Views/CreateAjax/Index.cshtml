@@ -1,0 +1,89 @@
+﻿@model Models.ViewModels.QueryView
+
+@{
+    ViewBag.Title = "CreateAjax";
+}
+
+<h2>Подача обращения</h2>
+
+<script src='@Url.Content("~/Scripts/jquery-1.10.2.js")' type='text/javascript'></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.js")' type='text/javascript'>         </script>
+<script src='@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")' type='text/javascript'></script> 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<div id="result"></div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Заявка принята</h4>
+            </div>
+            <div class="modal-body">
+                <p>Ваша заявка успешно принята. Ваш номер заявки <strong id="QueryId"></strong></p>
+                <a asp-controller="Home" asp-action="Index"></a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+        var getresult = function () {
+            $("#myModal").modal('show');
+            $("#SampleForm")[0].reset();
+        };
+</script>
+
+
+@using (Ajax.BeginForm("Index", "CreateAjax", null, new AjaxOptions { UpdateTargetId = "QueryId", OnSuccess= "getresult", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, new {id = "SampleForm" }))
+{
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Name)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Surname)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Surname)
+        @Html.ValidationMessageFor(model => model.Surname)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Birthdate)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Birthdate)
+        @Html.ValidationMessageFor(model => model.Birthdate)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Email)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.QueryText)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.QueryText)
+        @Html.ValidationMessageFor(model => model.QueryText)
+    </div>
+
+    <input type="submit" value="OK" />
+}

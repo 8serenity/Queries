@@ -3,13 +3,14 @@ using System.Web.Mvc;
 
 namespace Queries.Controllers
 {
-    
+
     public class QueryController : Controller
     {
 
         [HttpGet]
         [ImportModelState]
-        public ActionResult Create()
+        //public ActionResult Create(long? newAppealId = null) instead of using TempData
+        public ActionResult Create(long? newAppealId = null)
         {
             return View();
         }
@@ -21,6 +22,7 @@ namespace Queries.Controllers
         {
             if (!ModelState.IsValid)
             {
+                //return Json("ERROR");
                 return RedirectToAction("Create");
             }
 
@@ -29,6 +31,8 @@ namespace Queries.Controllers
             {
                 try
                 {
+                    //var result = registry.Save(newQuery).Id;
+                    //return Json(new { IsSuccess = true, Data = result });
                     TempData["QueryId"] = registry.Save(newQuery).Id;
                 }
                 catch
