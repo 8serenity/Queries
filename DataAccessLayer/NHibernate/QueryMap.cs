@@ -10,7 +10,7 @@ namespace DataAccessLayer.NHibernate
             Id(x => x.Id);
             Map(x => x.QueryText);
             Map(x => x.DateWritten);
-            Map(x => x.UserId);
+            References(x => x.User, "UserId");
             Map(x => x.QueryStatus);
             Table("Queries");
         }

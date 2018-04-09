@@ -35,12 +35,12 @@ namespace Queries
                 newUser.Name = query.Name;
                 newUser.Surname = query.Surname;
                 newUser.Password = Membership.GeneratePassword(8, 1);
-                newUser.Birthdate = query.Birthdate;
-                newQuery.UserId = Users.Save(newUser).Id;
+                newUser.Birthdate = query.Birthdate.Date;
+                newQuery.User = Users.Save(newUser) as User;
             }
             else
             {
-                newQuery.UserId = newUser.Id;
+                newQuery.User = newUser;
             }
 
             return Queries.Save(newQuery);
@@ -65,7 +65,7 @@ namespace Queries
         public List<UserQueryView> UserQueries(int id)
         {
             List<UserQueryView> userQueries = new List<UserQueryView>();
-            var queries = Queries.Get().Where(x => x.UserId == id);
+            var queries = Queries.Get().Where(x => x.User.Id == id);
             foreach (var q in queries)
             {
                 UserQueryView usrQuerytmp = new UserQueryView();

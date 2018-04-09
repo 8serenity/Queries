@@ -12,7 +12,9 @@ namespace DataAccessLayer.NHibernate
             Map(x => x.Surname);
             Map(x => x.Email);
             Map(x => x.Password);
+            Map(x => x.Birthdate);
             Table("Users");
+            HasMany(x => x.Queries).KeyColumn("Id");
         }
     }
 }

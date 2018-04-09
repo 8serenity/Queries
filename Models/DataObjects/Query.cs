@@ -7,7 +7,7 @@ namespace Models.DataObjects
         public virtual int Id { get; set; }
         public virtual string QueryText { get; set; }
         public virtual DateTime DateWritten { get; set; }
-        public virtual int UserId { get; set; }
+        public virtual User User { get; set; }
         public virtual int QueryStatus { get; set; }
     }
 }

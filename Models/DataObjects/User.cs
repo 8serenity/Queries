@@ -10,7 +10,7 @@ namespace Models.DataObjects
         public virtual string Surname { get; set; }
         public virtual string Email { get; set; }
         public virtual string Password { get; set; }
-        public virtual DateTime Birthdate { get; set; }  
+        public virtual DateTime Birthdate { get; set; }
 
         public virtual IList<Query> Queries { get; set; }
 
