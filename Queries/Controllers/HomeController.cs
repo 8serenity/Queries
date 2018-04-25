@@ -6,6 +6,7 @@ namespace Queries.Controllers
     {
         public ActionResult Index()
         {
+            
             return View();
         }
     }

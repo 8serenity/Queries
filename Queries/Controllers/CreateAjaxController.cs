@@ -1,10 +1,24 @@
-﻿using Models.ViewModels;
+﻿using Microsoft.AspNet.Identity.Owin;
+using Models.ViewModels;
+using Queries.Infrastructure;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Queries.Controllers
 {
     public class CreateAjaxController : Controller
+
     {
+        public SignInManager SignInManager
+        {
+            get { return HttpContext.GetOwinContext().Get<SignInManager>(); }
+        }
+
+        //private SignInManager _manager;
+        //public CreateAjaxController(SignInManager manager)
+        //{
+        //    _manager = manager;
+        //}
         // GET: CreateAjax
         public ActionResult Index()
         {
@@ -12,55 +26,56 @@ namespace Queries.Controllers
         }
 
         [HttpPost]
-        public string Index(QueryView newQuery)
+        public JsonResult Index(UserLoginView userToCheck)
         {
+            //User.Identity.Name отсюда доставешь инфу кто залогинен и показываешь ему инфу основанную на этом
+
             if (!ModelState.IsValid)
             {
-                //return new JsonResult()
-                //{
-                //    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                //    Data = new { result = "error" }
-                //};
-                return "sefsef";
-
+                return new JsonResult()
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { IsSuccess = false }
+                };
             }
 
-            using (RegistrationService registry = new RegistrationService())
+            //using (RegistrationService registry = new RegistrationService(SignInManager))
+            //{
+            //    try
+            //    {
+            RegistrationService registry = new RegistrationService(SignInManager);
+            var existedUser = registry.UserValid(userToCheck.Email, userToCheck.Password);
+            if (existedUser != null)
             {
-                try
+                SignInManager.PasswordSignIn(existedUser.UserName, userToCheck.Password, false, false);
+                //SignInManager.SignOut();
+                var asd = User.Identity.Name;
+
+                return new JsonResult()
                 {
-                    //var result = registry.Save(newQuery).Id;
-                    //return Json(new { IsSuccess = true, Data = result });
-                    //TempData["QueryId"] = registry.Save(newQuery).Id;
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { IsSuccess = true}
+                };
+            };
+            //}
+            //catch
+            //{
+            //    return new JsonResult()
+            //    {
+            //        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+            //        Data = new { IsSuccess = false}
+            //    };
 
-                    return registry.Save(newQuery).Id.ToString();
 
-                    //return registry.Save(newQuery).Id.ToString();
+            //return View("Querylist", registry.UserQueries(userToCheck.Id));
+            //}
 
-                    //return new JsonResult()
-                    //{
-                    //    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    //    Data = new { result = "success" }
-                    //};
-
-
-                    //return new JsonResult()
-                    //{
-                    //    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    //    Data = new { result = 35 }
-                    //};
-                }
-                catch
-                {
-                    return "sefsef";
-
-                    //return new JsonResult()
-                    //{
-                    //    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    //    Data = new { result = "error" }
-                    //};
-                }
-            }
+            return new JsonResult()
+            {
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                Data = new { IsSuccess = false }
+            };
+            //}
         }
     }
 }

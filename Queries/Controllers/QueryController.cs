@@ -1,4 +1,8 @@
-﻿using Models.ViewModels;
+﻿using Microsoft.AspNet.Identity.Owin;
+using Models.DataObjects;
+using Models.ViewModels;
+using Queries.Infrastructure;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Queries.Controllers
@@ -6,6 +10,18 @@ namespace Queries.Controllers
 
     public class QueryController : Controller
     {
+
+
+        public SignInManager SignInManager
+        {
+            get { return HttpContext.GetOwinContext().Get<SignInManager>(); }
+        }
+        //private SignInManager _manager;
+
+        //public QueryController( SignInManager <AppUser,string> signInManager)
+        //{
+        //    _manager = manager;
+        //}
 
         [HttpGet]
         [ImportModelState]
@@ -22,24 +38,22 @@ namespace Queries.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //return Json("ERROR");
                 return RedirectToAction("Create");
             }
 
+            RegistrationService registry = new RegistrationService(SignInManager);
 
-            using (RegistrationService registry = new RegistrationService())
-            {
-                try
-                {
-                    //var result = registry.Save(newQuery).Id;
-                    //return Json(new { IsSuccess = true, Data = result });
-                    TempData["QueryId"] = registry.Save(newQuery).Id;
-                }
-                catch
-                {
-                    return View();
-                }
-            }
+            //using (RegistrationService registry = new RegistrationService())
+            //{
+            //    try
+            //    {
+            TempData["QueryId"] = registry.Save(newQuery).Id;
+            //    }
+            //    catch
+            //    {
+            //        return View();
+            //    }
+            //}
 
 
             return RedirectToAction("Create");

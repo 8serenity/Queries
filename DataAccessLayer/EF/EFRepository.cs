@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Data.Entity.Migrations;
+using System.Linq;
 
 namespace DataAccessLayer.EF
 {
@@ -16,16 +18,16 @@ namespace DataAccessLayer.EF
             return Db.Set<TEntity>();
         }
 
-        public TEntity GetById(long id)
+        public TEntity GetById(string id)
         {
             return Db.Set<TEntity>().Find(id);
         }
 
         public TEntity Save(TEntity entity)
         {
-            TEntity user = Db.Set<TEntity>().Add(entity);
+            Db.Set<TEntity>().Add(entity);
             Db.SaveChanges();
-            return user;
+            return entity;
         }
         public void Dispose()
         {
@@ -35,15 +37,32 @@ namespace DataAccessLayer.EF
             }
         }
 
-        public bool Delete(int id)
+        public bool Delete(TEntity entity)
         {
-            TEntity entity = Db.Set<TEntity>().Find(id);
-            if (entity != null)
+            try
             {
                 Db.Set<TEntity>().Remove(entity);
+                Db.SaveChanges();
                 return true;
             }
-            return false;
+            catch (System.Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Update(TEntity entity)
+        {
+            try
+            {
+                Db.Set<TEntity>().AddOrUpdate(entity);
+                Db.SaveChanges();
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
         }
     }
 }

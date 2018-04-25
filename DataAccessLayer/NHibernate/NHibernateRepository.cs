@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NHibernate;
 
 namespace DataAccessLayer.NHibernate
@@ -51,7 +52,7 @@ namespace DataAccessLayer.NHibernate
         {
             return Session.Query<TEntity>();
         }
-        public TEntity GetById(long id)
+        public TEntity GetById(string id)
         {
             return Session.Get<TEntity>(id);
 
@@ -73,15 +74,34 @@ namespace DataAccessLayer.NHibernate
             }
         }
 
-        public bool Delete(int id)
+        public bool Delete(TEntity entity)
         {
-            TEntity entity = Session.Get<TEntity>(id);
-            if (entity != null)
+            try
             {
+                BeginTransaction();
                 Session.Delete(entity);
+                CommitTransaction();
                 return true;
             }
-            return false;
+            catch (System.Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Update(TEntity entity)
+        {
+            try
+            {
+                BeginTransaction();
+                Session.Update(entity);
+                CommitTransaction();
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
         }
     }
 }

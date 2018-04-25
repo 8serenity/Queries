@@ -1,11 +1,13 @@
 ﻿using DataAccessLayer.EF;
 using DataAccessLayer.NHibernate;
+using Microsoft.AspNet.Identity;
+using Models.DataObjects;
 
 namespace DataAccessLayer
 {
-    public static class RepositoryFactory
+    public class RepositoryFactory
     {
-        public static bool IsEf = false;
+        public static bool IsEf = true;
         public static IRepository<T> EntityRepo<T>() where T : class
         {
             if (IsEf)

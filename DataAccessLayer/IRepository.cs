@@ -7,7 +7,8 @@ namespace DataAccessLayer
     {
         T Save(T entity);
         IQueryable<T> Get();
-        T GetById(long id);
-        bool Delete(int id);
+        T GetById(string id);
+        bool Delete(T entity);
+        bool Update(T entity);
     }
 }

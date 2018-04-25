@@ -8,3 +8,9 @@ C:\Users\8\Desktop\WorkingAjax\Models\bin\Debug\Models.pdb
 C:\Users\8\Desktop\WorkingAjax\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
 C:\Users\8\Desktop\WorkingAjax\Models\obj\Debug\Models.dll
 C:\Users\8\Desktop\WorkingAjax\Models\obj\Debug\Models.pdb
+C:\Users\8\Desktop\WorkingAjax\Models\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\8\Desktop\WorkingAjax\Models\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\8\Desktop\WorkingAjax\Models\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\8\Desktop\WorkingAjax\Models\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\8\Desktop\WorkingAjax\Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\8\Desktop\WorkingAjax\Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml

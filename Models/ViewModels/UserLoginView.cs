@@ -5,6 +5,7 @@ namespace Models.ViewModels
     public class UserLoginView
     {
         [Display(Name = "E-mail")]
+        [EmailAddress]
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public virtual string Email { get; set; }
