@@ -59,7 +59,7 @@ namespace Queries
             }
             else
             {
-                newQuery.User = newUser;
+                newQuery.UserId = newUser.Id;
                 Queries.Save(newQuery);
             }
 
