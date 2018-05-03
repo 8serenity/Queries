@@ -7,7 +7,7 @@ namespace DataAccessLayer
 {
     public class RepositoryFactory
     {
-        public static bool IsEf = true;
+        public static bool IsEf = false;
         public static IRepository<T> EntityRepo<T>() where T : class
         {
             if (IsEf)
